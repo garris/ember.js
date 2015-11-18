@@ -29,7 +29,7 @@ var backburner = new Backburner(['sync', 'actions', 'destroy'], {
   onEnd: onEnd,
   onErrorTarget: Ember,
   onErrorMethod: 'onerror',
-  yieldInterval: 10
+  yieldInterval: 24
 });
 
 // ..........................................................
