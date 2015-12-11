@@ -673,6 +673,12 @@ export default Mixin.create({
   },
 
   scheduleRevalidate(node, label, manualRerender) {
+    // NOTES TO SELF
+    // this is where we know our renderFame has been invalidated.
+    // Here is where we need to increment our frameIndex
+    // revalidation needs to happen at the end of the current frame.
+
+
     if (node && !this._dispatching && this.env.renderedNodes.has(node)) {
       if (manualRerender) {
         deprecate(
