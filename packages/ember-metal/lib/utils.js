@@ -512,6 +512,12 @@ export function applyStr(t, m, a) {
   }
 }
 
+export let renderFrameId = 0;
+export function incrementRenderFrameId() {
+  return ++renderFrameId;
+}
+
+
 export {
   GUID_KEY,
   makeArray,
