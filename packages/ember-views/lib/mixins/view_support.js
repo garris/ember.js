@@ -679,7 +679,8 @@ export default Mixin.create({
     // Here is where we need to increment our frameIndex
     // revalidation needs to happen at the end of the current frame.
 
-    console.log('incrementRenderFrameId()', incrementRenderFrameId());
+    // console.log('incrementRenderFrameId()', incrementRenderFrameId());
+    incrementRenderFrameId();
 
     if (node && !this._dispatching && this.env.renderedNodes.has(node)) {
       if (manualRerender) {
