@@ -9,6 +9,7 @@ import { Mixin } from 'ember-metal/mixin';
 import { POST_INIT } from 'ember-runtime/system/core_object';
 import isEnabled from 'ember-metal/features';
 import { symbol } from 'ember-metal/utils';
+import { incrementRenderFrameId } from 'ember-metal/utils';
 
 const INIT_WAS_CALLED = symbol('INIT_WAS_CALLED');
 
@@ -673,6 +674,14 @@ export default Mixin.create({
   },
 
   scheduleRevalidate(node, label, manualRerender) {
+    // NOTES TO SELF
+    // this is where we know our renderFame has been invalidated.
+    // Here is where we need to increment our frameIndex
+    // revalidation needs to happen at the end of the current frame.
+
+    // console.log('incrementRenderFrameId()', incrementRenderFrameId());
+    incrementRenderFrameId();
+
     if (node && !this._dispatching && this.env.renderedNodes.has(node)) {
       if (manualRerender) {
         deprecate(
@@ -687,7 +696,10 @@ export default Mixin.create({
           { id: 'ember-views.render-double-modify', until: '3.0.0' }
         );
       }
-      run.scheduleOnce('render', this, this.revalidate);
+      if (!this.scheduledRevalidation || this._dispatching) {
+        this.scheduledRevalidation = true;
+        run.scheduleOnce('render', this, this.revalidate);
+      }
       return;
     }
 

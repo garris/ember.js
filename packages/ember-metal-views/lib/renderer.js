@@ -39,8 +39,11 @@ Renderer.prototype.prerenderTopLevelView =
     }).block;
 
     view.renderBlock(block, renderNode);
-    view.lastResult = renderNode.lastResult;
-    this.clearRenderedViews(view.env);
+
+    run.schedule('render', function() {
+      view.lastResult = renderNode.lastResult;
+    });
+    run.schedule('render', this, 'clearRenderedViews', view.env);
   };
 
 Renderer.prototype.renderTopLevelView =
@@ -49,7 +52,7 @@ Renderer.prototype.renderTopLevelView =
     if (view._willInsert) {
       view._willInsert = false;
       this.prerenderTopLevelView(view, renderNode);
-      this.dispatchLifecycleHooks(view.env);
+      run.schedule('render', this, 'dispatchLifecycleHooks', view.env);
     }
   };
 
@@ -61,9 +64,9 @@ Renderer.prototype.revalidateTopLevelView =
       // supports createElement, which operates without moving the view into
       // the inDOM state.
       if (view._state === 'inDOM') {
-        this.dispatchLifecycleHooks(view.env);
+        run.schedule('render', this, 'dispatchLifecycleHooks', view.env);
       }
-      this.clearRenderedViews(view.env);
+      run.schedule('render', this, 'clearRenderedViews', view.env);
     }
   };
 

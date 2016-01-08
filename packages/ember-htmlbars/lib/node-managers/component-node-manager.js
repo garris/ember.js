@@ -142,30 +142,33 @@ ComponentNodeManager.prototype.render = function ComponentNodeManager_render(_en
       this.block.invoke(env, [], undefined, this.renderNode, this.scope, visitor);
     }
 
-    let element;
-    if (this.expectElement || component.isGlimmerComponent) {
-      // This code assumes that Glimmer components are never fragments. When
-      // Glimmer components gain fragment powers, we will need to communicate
-      // whether the layout produced a single top-level node or fragment
-      // somehow (either via static information on the template/component, or
-      // dynamically as the layout is being rendered).
-      element = this.renderNode.firstNode;
+    Ember.run.schedule('render', this, function () {
+      let element;
+      if (this.expectElement || component.isGlimmerComponent) {
+        // This code assumes that Glimmer components are never fragments. When
+        // Glimmer components gain fragment powers, we will need to communicate
+        // whether the layout produced a single top-level node or fragment
+        // somehow (either via static information on the template/component, or
+        // dynamically as the layout is being rendered).
+        element = this.renderNode.firstNode;
 
-      // Glimmer components may have whitespace or boundary nodes around the
-      // top-level element.
-      if (element && element.nodeType !== 1) {
-        element = nextElementSibling(element);
+        // Glimmer components may have whitespace or boundary nodes around the
+        // top-level element.
+        if (element && element.nodeType !== 1) {
+          element = nextElementSibling(element);
+        }
       }
-    }
 
-    // In environments like FastBoot, disable any hooks that would cause the component
-    // to access the DOM directly.
-    if (env.destinedForDOM) {
-      env.renderer.didCreateElement(component, element);
-      env.renderer.willInsertElement(component, element);
+      // In environments like FastBoot, disable any hooks that would cause the component
+      // to access the DOM directly.
+      if (env.destinedForDOM) {
+        env.renderer.didCreateElement(component, element);
+        env.renderer.willInsertElement(component, element);
 
-      env.lifecycleHooks.push({ type: 'didInsertElement', view: component });
-    }
+        env.lifecycleHooks.push({ type: 'didInsertElement', view: component });
+      }
+    });
+
   }, this);
 };
 
@@ -174,7 +177,7 @@ function nextElementSibling(node) {
 
   while (current) {
     if (current.nodeType === 1) { return current; }
-    current = node.nextSibling;
+    current = current.nextSibling;
   }
 }
 
