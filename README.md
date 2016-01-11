@@ -1,3 +1,34 @@
+Ember Time-sliced
+--------
+Welcome to the time-sliced version of Ember.  This version introduces the concept of time-slicing such that complex (and slow) routes only churn for a configurable time interval.   When the time interval has been reached, Ember yields to allow the browser to paint then resumes route processing until the next time interval has been reached. 
+
+This version uses a modified version of Backburner and HtmlBars 
+
+```
+npm install https://github.com/garris/ember.js.git#timesliced
+cd node_modules/ember/
+npm install
+cd node_modules/htmlbars/
+npm install
+cd ../../
+npm run build
+npm start
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Ember.js [![Build Status](https://secure.travis-ci.org/emberjs/ember.js.svg?branch=master)](http://travis-ci.org/emberjs/ember.js) [![Code Climate](https://codeclimate.com/github/emberjs/ember.js.svg)](https://codeclimate.com/github/emberjs/ember.js)
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/ember-ci.svg)](https://saucelabs.com/u/ember-ci)
 
