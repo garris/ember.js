@@ -1,8 +1,21 @@
-Ember Time-sliced
---------
-Welcome to the time-sliced version of Ember.  This version introduces the concept of time-slicing such that complex (and slow) routes only churn for a configurable time interval.   When the time interval has been reached, Ember yields to allow the browser to paint then resumes route processing until the next time interval has been reached. 
+#RFC: Ember Time-sliced
 
-This version uses a modified version of Backburner and HtmlBars 
+This version of Ember introduces the concept of time-slicing which limits route churn to a configurable time interval.   
+
+During route processing, when the time interval has been reached, this version of Ember will yield processing on the main browser thread to allow browser painting. After native browser tasks have returned, Ember resumes route processing and the yielding cycle repeats until all Ember tasks (via Backburner) are completed. 
+
+Backburner and HtmlBars have also been modified to enable yielding.
+
+
+
+##Changes
+
+https://github.com/garris/ember.js/pull/1/files
+https://github.com/garris/backburner.js/pull/1/files
+https://github.com/garris/htmlbars/pull/2/files
+
+
+##Installation
 
 ```
 npm install https://github.com/garris/ember.js.git#timesliced
@@ -17,8 +30,7 @@ npm start
 ```
 
 
-
-
+-----
 
 
 
