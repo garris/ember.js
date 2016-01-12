@@ -7,18 +7,20 @@ During route processing, when the time interval has been reached, this version o
 Backburner and HtmlBars have also been modified to enable yielding.
 
 
+##Change summaries
+
+```
+https://github.com/garris/ember.js/pull/1/files
+https://github.com/garris/backburner.js/pull/1/files
+https://github.com/garris/htmlbars/pull/2/files
+```
+
+
 ##Known Issues
 
 Any app or plug-in which directly modified the DOM outside of an Ember.run() call could run into a condition where expected DOM does not exist. This is still the case in htmlBars [here](https://github.com/garris/htmlbars/pull/2/files#diff-4cbe40209351d490bc4ecc31c36af665R143).
 
 There are many many tests which are failing due to changes in the run loop flow.  These issues still need to be addressed.
-
-
-##Changes
-
-https://github.com/garris/ember.js/pull/1/files
-https://github.com/garris/backburner.js/pull/1/files
-https://github.com/garris/htmlbars/pull/2/files
 
 
 ##Installation
