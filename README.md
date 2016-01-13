@@ -1,6 +1,8 @@
 #RFC: Ember Time-sliced
 
-This version of Ember introduces the concept of time-slicing which limits route churn to a configurable time interval.   
+_**NOTE: See [timeslicing/readme.md](timeslicing/readme.md) for perf results and a background on why we are exploring this approach.**_
+
+This version of Ember introduces the concept of time-slicing which limits route churn to a configurable time interval.  
 
 During route processing, when the time interval has been reached, this version of Ember will yield processing on the main browser thread to allow browser painting. After native browser tasks have returned, Ember resumes route processing and the yielding cycle repeats until all Ember tasks (via Backburner) are completed. 
 
