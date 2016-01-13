@@ -34,5 +34,5 @@ Using a different server harness (more like production enviornment) and generati
 ![./rumTests.png](./rumTests.png)
 
 NOTE: Currently not sure why earlier tests show better results -- **Feed route early POC: 1809ms vs later POC 883ms.**
-There many differences between the two tests -- would like to look into where the differences came from.
+There many differences between the two tests -- would like to look into where the negative impacts came from.
 
