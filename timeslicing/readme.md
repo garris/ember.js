@@ -5,7 +5,7 @@ Ember is slow to render view updates to the screen.
 
 A perceptual speed improvement can come from “time-slicing” Ember’s internal Ember.run() loop -- which blocks browser render cycles for long periods of time during route changes.
 
-###Negative effects seen in Voyager-Web
+###Negative effects seen in large and complex app
 - slow view updates
 - blocking on basic browser interactions (e.g. scrolling) during route transitions
 
@@ -29,9 +29,9 @@ Using just serve and manually timing churn from API response to an "actionable" 
 
 
 #### Recent performance results
-Using just BPR harness (following Chris Pettit's instructions) and generating RUM via script tags in the DOM.
+Using a different server harness (more like production enviornment) and generating perf markers via script tags in the DOM.
 
 ![./rumTests.png](./rumTests.png)
 
-*I am currently not sure why the earlier tests show better results -- there are currently a lot of differences between the two tests -- so understanding may take some time.*
+*Currently not sure why earlier tests show better results -- there many differences between the two tests -- so a better understanding may take some time.*
 
