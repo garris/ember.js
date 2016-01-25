@@ -30,6 +30,7 @@ Using just serve and manually timing churn from API response to an "actionable" 
 
 #### Recent performance results
 Using a different server harness (more like production enviornment) and generating perf markers via script tags in the DOM.
+Multiple perf runs, loading a single 'feed' route.
 
 ![./rumTests.png](./rumTests.png)
 
