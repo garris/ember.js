@@ -29,7 +29,7 @@ var backburner = new Backburner(['sync', 'actions', 'destroy'], {
   onEnd: onEnd,
   onErrorTarget: Ember,
   onErrorMethod: 'onerror',
-  yieldInterval: 100,
+  yieldInterval: (typeof Document !== 'function') ? 0 : 100,
   yieldFilter: function(currentInstance) {
     return currentInstance.queueNames[currentInstance.queueNameIndex] === 'render';
   }
